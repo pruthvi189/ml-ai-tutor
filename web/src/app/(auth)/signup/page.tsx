@@ -105,7 +105,7 @@ export default function SignupPage() {
                         gradient: "bg-white",
                       },
                       {
-                        href: null,
+                        href: "/under-progress",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -115,29 +115,17 @@ export default function SignupPage() {
                       },
                     ].map((social, index) => (
                       <li key={index} className="list-none">
-                        {social.href ? (
-                          <a
-                            href={social.href}
-                            className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden group"
-                          >
-                            <div
-                              className={`absolute inset-0 w-full h-full ${social.gradient} scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100`}
-                            />
-                            <span className="text-[1.2rem] text-white/60 transition-all duration-500 ease-in-out z-[2] group-hover:text-black group-hover:rotate-y-[360deg]">
-                              {social.icon}
-                            </span>
-                          </a>
-                        ) : (
-                          <button
-                            type="button"
-                            disabled
-                            className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden opacity-30 cursor-not-allowed"
-                          >
-                            <span className="text-[1.2rem] text-white/40">
-                              {social.icon}
-                            </span>
-                          </button>
-                        )}
+                        <a
+                          href={social.href}
+                          className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden group"
+                        >
+                          <div
+                            className={`absolute inset-0 w-full h-full ${social.gradient} scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100`}
+                          />
+                          <span className="text-[1.2rem] text-white/60 transition-all duration-500 ease-in-out z-[2] group-hover:text-black group-hover:rotate-y-[360deg]">
+                            {social.icon}
+                          </span>
+                        </a>
                       </li>
                     ))}
                   </ul>
