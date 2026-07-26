@@ -1,6 +1,9 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
+import { db } from "./db";
+import { users } from "./schema";
+import { eq, and } from "drizzle-orm";
 
 const SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "ml-tutor-secret-change-in-production"
@@ -74,4 +77,52 @@ export async function setSessionCookie(token: string) {
 export async function clearSessionCookie() {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);
+}
+
+export async function upsertOAuthUser({
+  provider,
+  providerId,
+  email,
+  name,
+}: {
+  provider: string;
+  providerId: string;
+  email: string;
+  name: string;
+}) {
+  const existing = await db
+    .select()
+    .from(users)
+    .where(and(eq(users.oauthProvider, provider), eq(users.oauthId, providerId)))
+    .limit(1);
+
+  if (existing.length > 0) {
+    return existing[0];
+  }
+
+  const emailUser = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email.toLowerCase()))
+    .limit(1);
+
+  if (emailUser.length > 0) {
+    await db
+      .update(users)
+      .set({ oauthProvider: provider, oauthId: providerId })
+      .where(eq(users.id, emailUser[0].id));
+    return emailUser[0];
+  }
+
+  const [user] = await db
+    .insert(users)
+    .values({
+      email: email.toLowerCase(),
+      name,
+      oauthProvider: provider,
+      oauthId: providerId,
+    })
+    .returning();
+
+  return user;
 }

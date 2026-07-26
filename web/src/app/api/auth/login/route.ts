@@ -22,8 +22,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
 
-    const valid = await verifyPassword(password, user.passwordHash);
-    if (!valid) {
+    if (user.passwordHash) {
+      const valid = await verifyPassword(password, user.passwordHash);
+      if (!valid) {
+        return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+      }
+    } else if (user.oauthProvider) {
+      return NextResponse.json(
+        { error: `This account uses ${user.oauthProvider} sign-in. Please use that instead.` },
+        { status: 401 }
+      );
+    } else {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
 

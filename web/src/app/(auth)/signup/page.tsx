@@ -84,6 +84,7 @@ export default function SignupPage() {
                   <ul className="flex gap-3 md:gap-4">
                     {[
                       {
+                        href: "/api/auth/github",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
@@ -92,6 +93,7 @@ export default function SignupPage() {
                         gradient: "bg-[#c8ff00]",
                       },
                       {
+                        href: "/api/auth/google",
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
@@ -103,6 +105,7 @@ export default function SignupPage() {
                         gradient: "bg-white",
                       },
                       {
+                        href: null,
                         icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -112,17 +115,29 @@ export default function SignupPage() {
                       },
                     ].map((social, index) => (
                       <li key={index} className="list-none">
-                        <button
-                          type="button"
-                          className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden group cursor-pointer"
-                        >
-                          <div
-                            className={`absolute inset-0 w-full h-full ${social.gradient} scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100`}
-                          />
-                          <span className="text-[1.2rem] text-white/60 transition-all duration-500 ease-in-out z-[2] group-hover:text-black group-hover:rotate-y-[360deg]">
-                            {social.icon}
-                          </span>
-                        </button>
+                        {social.href ? (
+                          <a
+                            href={social.href}
+                            className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden group"
+                          >
+                            <div
+                              className={`absolute inset-0 w-full h-full ${social.gradient} scale-y-0 origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100`}
+                            />
+                            <span className="text-[1.2rem] text-white/60 transition-all duration-500 ease-in-out z-[2] group-hover:text-black group-hover:rotate-y-[360deg]">
+                              {social.icon}
+                            </span>
+                          </a>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled
+                            className="w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-white/5 rounded-full flex justify-center items-center relative z-[1] border-2 border-white/10 overflow-hidden opacity-30 cursor-not-allowed"
+                          >
+                            <span className="text-[1.2rem] text-white/40">
+                              {social.icon}
+                            </span>
+                          </button>
+                        )}
                       </li>
                     ))}
                   </ul>
