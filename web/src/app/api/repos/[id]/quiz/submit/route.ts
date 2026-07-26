@@ -2,12 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { quizzes, quizAttempts } from "@/lib/schema";
 import { eq } from "drizzle-orm";
+import { getSession } from "@/lib/auth";
 
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { lessonId, answers } = await request.json();
 
     if (!Array.isArray(answers) || answers.length === 0) {
@@ -33,6 +39,7 @@ export async function POST(
 
       await db.insert(quizAttempts).values({
         quizId: answer.quizId,
+        userId: session.userId,
         selectedIndex: answer.selectedIndex,
         correct: isCorrect,
       });

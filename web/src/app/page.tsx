@@ -3,12 +3,14 @@ import { StatCard } from "@/components/stat-card";
 import { BookOpen, GitBranch, Trophy, Target, Zap, Mic } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
-import { courses, lessons, quizzes, userProgress, quizAttempts } from "@/lib/schema";
-import { count, eq } from "drizzle-orm";
+import { courses, lessons, quizAttempts, userProgress } from "@/lib/schema";
+import { eq, count } from "drizzle-orm";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-async function getStats() {
+async function getStats(userId: number) {
   try {
-    const progress = await db.select().from(userProgress).limit(1);
+    const progress = await db.select().from(userProgress).where(eq(userProgress.userId, userId)).limit(1);
     const xp = progress[0]?.totalXp ?? 0;
     const level = progress[0]?.level ?? 1;
 
@@ -29,7 +31,10 @@ async function getStats() {
 }
 
 export default async function DashboardPage() {
-  const stats = await getStats();
+  const session = await getSession();
+  if (!session) redirect("/login");
+
+  const stats = await getStats(session.userId);
   const masteryPct = stats.lessons > 0 ? Math.min(100, Math.round((stats.quizzes / Math.max(stats.lessons, 1)) * 100)) : 0;
 
   return (
