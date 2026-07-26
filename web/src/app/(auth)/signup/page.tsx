@@ -201,8 +201,8 @@ export default function SignupPage() {
         <div className="hidden lg:block w-1/2 h-full overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-br from-[#a855f7]/10 via-transparent to-[#c8ff00]/10 z-10" />
           <img
-            src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1260&h=750&dpr=2"
-            alt="AI and machine learning"
+            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1260&h=750&dpr=2"
+            alt="Code editor"
             className="w-full h-full object-cover opacity-40 transition-transform duration-300"
           />
           <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20">

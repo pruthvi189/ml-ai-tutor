@@ -198,8 +198,8 @@ export default function LoginPage() {
           {/* Gradient overlay on top of image */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#c8ff00]/10 via-transparent to-[#a855f7]/10 z-10" />
           <img
-            src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1260&h=750&dpr=2"
-            alt="AI visualization"
+            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1260&h=750&dpr=2"
+            alt="Code editor"
             className="w-full h-full object-cover opacity-40 transition-transform duration-300"
           />
           {/* Bottom overlay with tagline */}
