@@ -1,0 +1,274 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains);
+  --font-heading: var(--font-space-grotesk);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-lime: #c8ff00;
+  --color-pink: #ff2d6f;
+  --color-cyan: #00d4ff;
+  --color-purple: #a855f7;
+  --color-orange: #f97316;
+  --color-yellow: #facc15;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #141414;
+  --card-foreground: #ffffff;
+  --popover: #141414;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1e1e1e;
+  --secondary-foreground: #ffffff;
+  --muted: #1e1e1e;
+  --muted-foreground: #888888;
+  --accent: #1e1e1e;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #333333;
+  --input: #333333;
+  --ring: #ffffff;
+  --chart-1: #c8ff00;
+  --chart-2: #ff2d6f;
+  --chart-3: #00d4ff;
+  --chart-4: #a855f7;
+  --chart-5: #f97316;
+  --radius: 0px;
+  --sidebar: #0f0f0f;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #c8ff00;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #333333;
+  --sidebar-ring: #c8ff00;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ============================================ */
+/* COMIC BRUTALISM — HALFTONE + POP ART        */
+/* ============================================ */
+
+/* Noise texture overlay */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Halftone dot pattern overlay */
+.halftone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+  background-size: 8px 8px;
+  z-index: 1;
+}
+
+/* Ben-Day dots pattern */
+.benday {
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+/* Comic panel border — thick black outline */
+.comic-panel {
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px 0px #000000;
+  position: relative;
+}
+
+/* Comic panel with color accent */
+.comic-panel-lime {
+  border: 3px solid #c8ff00;
+  box-shadow: 6px 6px 0px 0px #c8ff00;
+}
+.comic-panel-pink {
+  border: 3px solid #ff2d6f;
+  box-shadow: 6px 6px 0px 0px #ff2d6f;
+}
+.comic-panel-cyan {
+  border: 3px solid #00d4ff;
+  box-shadow: 6px 6px 0px 0px #00d4ff;
+}
+.comic-panel-purple {
+  border: 3px solid #a855f7;
+  box-shadow: 6px 6px 0px 0px #a855f7;
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  border: 3px solid #ffffff;
+  background: #1a1a1a;
+  padding: 16px;
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 24px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 16px solid #ffffff;
+}
+
+/* Starburst badge */
+.starburst {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+.starburst::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Action word burst */
+.burst-text {
+  font-family: var(--font-space-grotesk);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  -webkit-text-stroke: 2px #000000;
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0px #000000;
+}
+
+/* Speed lines background */
+.speed-lines {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.02) 4px,
+    rgba(255, 255, 255, 0.02) 8px
+  );
+}
+
+/* Cross-hatch pattern */
+.crosshatch {
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+    repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+}
+
+/* Brutalist scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; border-left: 3px solid #333; }
+::-webkit-scrollbar-thumb { background: #333; border: 2px solid #0a0a0a; }
+::-webkit-scrollbar-thumb:hover { background: #c8ff00; }
+
+/* Selection color */
+::selection { background: rgba(200, 255, 0, 0.4); color: #000; }
+
+/* Prose overrides — comic style */
+.prose h1 { font-family: var(--font-space-grotesk); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 4px solid #c8ff00; padding-bottom: 8px; }
+.prose h2 { font-family: var(--font-space-grotesk); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #c8ff00; border-left: 6px solid #c8ff00; padding-left: 16px; }
+.prose h3 { font-family: var(--font-space-grotesk); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #ff2d6f; }
+.prose code { font-family: var(--font-jetbrains); background: rgba(200, 255, 0, 0.1); border: 2px solid rgba(200, 255, 0, 0.2); padding: 2px 6px; }
+.prose pre { font-family: var(--font-jetbrains); border: 3px solid #333; box-shadow: 6px 6px 0px #000; }
+.prose blockquote { border-left: 6px solid #ff2d6f; background: rgba(255, 45, 111, 0.05); padding: 16px; }
+.prose a { color: #c8ff00; text-decoration: underline; text-underline-offset: 4px; border-bottom: 2px solid #c8ff00; }
+.prose strong { color: #ffffff; font-weight: 900; }
+.prose ul { list-style: none; padding-left: 0; }
+.prose ul li::before { content: "→ "; color: #c8ff00; font-weight: 900; }
+
+/* Animated hover for comic panels */
+.comic-hover {
+  transition: all 0.15s ease-out;
+}
+.comic-hover:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px 0px #000000;
+}
+
+/* Pop art gradient background */
+.pop-gradient {
+  background: linear-gradient(135deg, #c8ff00 0%, #ff2d6f 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
